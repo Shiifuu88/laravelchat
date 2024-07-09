@@ -1,2 +1,6 @@
-# Ignoriere alle Dateien und Ordner
-*
+# Ignore node_modules folder
+/node_modules
+/.vscode
+
+# Ignore .env file
+.env
