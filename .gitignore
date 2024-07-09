@@ -1,11 +1,8 @@
-# Ignoriere alles
+# Ignoriere alle Dateien und Ordner
 *
 
-# Erlaube nicht das Ignorieren von speziellen Ordnern und deren Inhalten
+# Erlaube die folgenden spezifischen Ordner und deren Inhalt
 !/app/
 !/database/
 !/resources/
 !/routes/
-
-# Erlaube nicht das Ignorieren von speziellen Dateien
-!.gitignore
