@@ -9,7 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Events\UserJoinedRoom;
 use App\Events\UserLeftRoom;
-
+use DB;
 class ChatRoomController extends Controller
 {
     public function index()
@@ -74,8 +74,12 @@ class ChatRoomController extends Controller
         $chatRoom = ChatRoom::find($chatRoomId);
 
         if ($chatRoom && $user) {
-            $chatRoom->users()->detach($user->id);
-            event(new UserLeftRoom($user, $chatRoomId));
+            DB::table('sessions')
+                ->where('user_id', $user->id)
+                ->update(['chat_room_id' => null, 'chat_room_name' => null]);
+
+                session(['chat_room_id' => null, 'chat_room_name' => null]);
+                event(new UserLeftRoom($user, $chatRoomId));
         }
 
         return redirect()->route('chatrooms.index')->with('status', 'You have left the room');

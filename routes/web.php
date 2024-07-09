@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('home', [ChatRoomController::class, 'index'])->name('home');
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [ChatRoomController::class, 'index'])->name('chatrooms.index');
     Route::get('/chatrooms/{chatRoom}', [ChatRoomController::class, 'show'])->name('chatrooms.show');

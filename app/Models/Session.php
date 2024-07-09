@@ -26,4 +26,13 @@ class Session extends Model
         return $this->belongsTo(ChatRoom::class);
     }
     
+    public function currentRoom()
+    {
+        $session = DB::table('sessions')
+            ->where('user_id', $this->id)
+            ->whereNotNull('chat_room_id')
+            ->first();
+
+        return $session ? $session->chat_room_id : null;
+    }
 }

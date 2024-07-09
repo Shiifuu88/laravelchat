@@ -20,4 +20,5 @@ class ChatRoom extends Model
     {
         return $this->belongsToMany(User::class, 'sessions', 'chat_room_id', 'user_id');
     }
+    
 }
