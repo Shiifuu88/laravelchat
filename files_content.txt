@@ -352,7 +352,7 @@ class ProfileController extends Controller
 ============================================================
 Datei: AuthenticatedSessionController.php
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\AuthenticatedSessionController
-
+.
 <?php
 
 namespace App\Http\Controllers\Auth;
@@ -401,11 +401,11 @@ class AuthenticatedSessionController extends Controller
         return redirect('/');
     }
 }
-
+.
 ============================================================
 Datei: ConfirmablePasswordController.php
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\ConfirmablePasswordController
-
+.
 <?php
 
 namespace App\Http\Controllers\Auth;
@@ -447,11 +447,11 @@ class ConfirmablePasswordController extends Controller
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 }
-
+.
 ============================================================
 Datei: EmailVerificationNotificationController.php
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\EmailVerificationNotificationController
-
+.
 <?php
 
 namespace App\Http\Controllers\Auth;
@@ -477,11 +477,11 @@ class EmailVerificationNotificationController extends Controller
         return back()->with('status', 'verification-link-sent');
     }
 }
-
+.
 ============================================================
 Datei: EmailVerificationPromptController.php
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\EmailVerificationPromptController
-
+.
 <?php
 
 namespace App\Http\Controllers\Auth;
@@ -504,11 +504,11 @@ class EmailVerificationPromptController extends Controller
                     : view('auth.verify-email');
     }
 }
-
+.
 ============================================================
 Datei: NewPasswordController.php
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\NewPasswordController
-
+.
 <?php
 
 namespace App\Http\Controllers\Auth;
@@ -570,11 +570,11 @@ class NewPasswordController extends Controller
                             ->withErrors(['email' => __($status)]);
     }
 }
-
+.
 ============================================================
 Datei: PasswordController.php
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\PasswordController
-
+.
 <?php
 
 namespace App\Http\Controllers\Auth;
@@ -604,11 +604,11 @@ class PasswordController extends Controller
         return back()->with('status', 'password-updated');
     }
 }
-
+.
 ============================================================
 Datei: PasswordResetLinkController.php
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\PasswordResetLinkController
-
+.
 <?php
 
 namespace App\Http\Controllers\Auth;
@@ -653,11 +653,11 @@ class PasswordResetLinkController extends Controller
                             ->withErrors(['email' => __($status)]);
     }
 }
-
+.
 ============================================================
 Datei: RegisteredUserController.php
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\RegisteredUserController
-
+.
 <?php
 
 namespace App\Http\Controllers\Auth;
@@ -709,11 +709,11 @@ class RegisteredUserController extends Controller
         return redirect(RouteServiceProvider::HOME);
     }
 }
-
+.
 ============================================================
 Datei: VerifyEmailController.php
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\VerifyEmailController
-
+.
 <?php
 
 namespace App\Http\Controllers\Auth;
@@ -742,401 +742,7 @@ class VerifyEmailController extends Controller
         return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');
     }
 }
-
-============================================================
-Datei: AuthenticatedSessionController.php
-Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\AuthenticatedSessionController
-
-<?php
-
-namespace App\Http\Controllers\Auth;
-
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
-
-class AuthenticatedSessionController extends Controller
-{
-    /**
-     * Display the login view.
-     */
-    public function create(): View
-    {
-        return view('auth.login');
-    }
-
-    /**
-     * Handle an incoming authentication request.
-     */
-    public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
-
-        $request->session()->regenerate();
-
-        return redirect()->intended(RouteServiceProvider::HOME);
-    }
-
-    /**
-     * Destroy an authenticated session.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect('/');
-    }
-}
-
-============================================================
-Datei: ConfirmablePasswordController.php
-Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\ConfirmablePasswordController
-
-<?php
-
-namespace App\Http\Controllers\Auth;
-
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
-use Illuminate\View\View;
-
-class ConfirmablePasswordController extends Controller
-{
-    /**
-     * Show the confirm password view.
-     */
-    public function show(): View
-    {
-        return view('auth.confirm-password');
-    }
-
-    /**
-     * Confirm the user's password.
-     */
-    public function store(Request $request): RedirectResponse
-    {
-        if (! Auth::guard('web')->validate([
-            'email' => $request->user()->email,
-            'password' => $request->password,
-        ])) {
-            throw ValidationException::withMessages([
-                'password' => __('auth.password'),
-            ]);
-        }
-
-        $request->session()->put('auth.password_confirmed_at', time());
-
-        return redirect()->intended(RouteServiceProvider::HOME);
-    }
-}
-
-============================================================
-Datei: EmailVerificationNotificationController.php
-Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\EmailVerificationNotificationController
-
-<?php
-
-namespace App\Http\Controllers\Auth;
-
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-
-class EmailVerificationNotificationController extends Controller
-{
-    /**
-     * Send a new email verification notification.
-     */
-    public function store(Request $request): RedirectResponse
-    {
-        if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(RouteServiceProvider::HOME);
-        }
-
-        $request->user()->sendEmailVerificationNotification();
-
-        return back()->with('status', 'verification-link-sent');
-    }
-}
-
-============================================================
-Datei: EmailVerificationPromptController.php
-Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\EmailVerificationPromptController
-
-<?php
-
-namespace App\Http\Controllers\Auth;
-
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
-
-class EmailVerificationPromptController extends Controller
-{
-    /**
-     * Display the email verification prompt.
-     */
-    public function __invoke(Request $request): RedirectResponse|View
-    {
-        return $request->user()->hasVerifiedEmail()
-                    ? redirect()->intended(RouteServiceProvider::HOME)
-                    : view('auth.verify-email');
-    }
-}
-
-============================================================
-Datei: NewPasswordController.php
-Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\NewPasswordController
-
-<?php
-
-namespace App\Http\Controllers\Auth;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rules;
-use Illuminate\View\View;
-
-class NewPasswordController extends Controller
-{
-    /**
-     * Display the password reset view.
-     */
-    public function create(Request $request): View
-    {
-        return view('auth.reset-password', ['request' => $request]);
-    }
-
-    /**
-     * Handle an incoming new password request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'token' => ['required'],
-            'email' => ['required', 'email'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
-        // Here we will attempt to reset the user's password. If it is successful we
-        // will update the password on an actual user model and persist it to the
-        // database. Otherwise we will parse the error and return the response.
-        $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function ($user) use ($request) {
-                $user->forceFill([
-                    'password' => Hash::make($request->password),
-                    'remember_token' => Str::random(60),
-                ])->save();
-
-                event(new PasswordReset($user));
-            }
-        );
-
-        // If the password was successfully reset, we will redirect the user back to
-        // the application's home authenticated view. If there is an error we can
-        // redirect them back to where they came from with their error message.
-        return $status == Password::PASSWORD_RESET
-                    ? redirect()->route('login')->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                            ->withErrors(['email' => __($status)]);
-    }
-}
-
-============================================================
-Datei: PasswordController.php
-Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\PasswordController
-
-<?php
-
-namespace App\Http\Controllers\Auth;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
-
-class PasswordController extends Controller
-{
-    /**
-     * Update the user's password.
-     */
-    public function update(Request $request): RedirectResponse
-    {
-        $validated = $request->validateWithBag('updatePassword', [
-            'current_password' => ['required', 'current_password'],
-            'password' => ['required', Password::defaults(), 'confirmed'],
-        ]);
-
-        $request->user()->update([
-            'password' => Hash::make($validated['password']),
-        ]);
-
-        return back()->with('status', 'password-updated');
-    }
-}
-
-============================================================
-Datei: PasswordResetLinkController.php
-Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\PasswordResetLinkController
-
-<?php
-
-namespace App\Http\Controllers\Auth;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
-use Illuminate\View\View;
-
-class PasswordResetLinkController extends Controller
-{
-    /**
-     * Display the password reset link request view.
-     */
-    public function create(): View
-    {
-        return view('auth.forgot-password');
-    }
-
-    /**
-     * Handle an incoming password reset link request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'email' => ['required', 'email'],
-        ]);
-
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
-
-        return $status == Password::RESET_LINK_SENT
-                    ? back()->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                            ->withErrors(['email' => __($status)]);
-    }
-}
-
-============================================================
-Datei: RegisteredUserController.php
-Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\RegisteredUserController
-
-<?php
-
-namespace App\Http\Controllers\Auth;
-
-use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-use Illuminate\View\View;
-
-class RegisteredUserController extends Controller
-{
-    /**
-     * Display the registration view.
-     */
-    public function create(): View
-    {
-        return view('auth.register');
-    }
-
-    /**
-     * Handle an incoming registration request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
-    }
-}
-
-============================================================
-Datei: VerifyEmailController.php
-Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\VerifyEmailController
-
-<?php
-
-namespace App\Http\Controllers\Auth;
-
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Verified;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Http\RedirectResponse;
-
-class VerifyEmailController extends Controller
-{
-    /**
-     * Mark the authenticated user's email address as verified.
-     */
-    public function __invoke(EmailVerificationRequest $request): RedirectResponse
-    {
-        if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');
-        }
-
-        if ($request->user()->markEmailAsVerified()) {
-            event(new Verified($request->user()));
-        }
-
-        return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');
-    }
-}
-
+.
 ============================================================
 Ordner: C:\xampp\htdocs\laravel\app\Http\Middleware
 ============================================================
@@ -2248,7 +1854,319 @@ return new class extends Migration
 ============================================================
 Ordner: C:\xampp\htdocs\laravel\resources\css
 ============================================================
+Datei: app.css
+Pfad: C:\xampp\htdocs\laravel\resources\css\app
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Styles */
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent scrolling on the main page */
+}
+
+/* Main Container */
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    min-height: calc(100vh - 64px); /* Adjusted for navbar height */
+    margin-top: 64px; /* Adjusted for navbar height */
+    overflow: hidden; /* Prevent scrolling */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+    height: 500px; /* Fixed height */
+    overflow-y: auto; /* Allow scrolling within sidebar */
+}
+
+.sidebar h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    margin-bottom: 0.75rem;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.3s;
+}
+
+.sidebar a:hover {
+    color: #0056b3;
+}
+
+.leave-room-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #dc3545;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.leave-room-btn:hover {
+    background-color: #c82333;
+}
+
+/* Chat Container */
+.chat-container {
+    flex-grow: 1;
+    max-width: 800px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    margin-bottom: 1rem;
+    text-align: center;
+    border-bottom: 2px solid #f0f2f5;
+    padding-bottom: 10px;
+}
+
+.chat-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.chat-body {
+    flex-grow: 1;
+    overflow-y: scroll;
+    padding: 10px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    border: 1px solid #f0f2f5;
+    margin-bottom: 1rem;
+    max-height: 500px; /* Fixed height */
+}
+
+.chat-footer {
+    display: flex;
+    align-items: center;
+}
+
+.chat-footer input {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+}
+
+.chat-footer button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #007bff;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.chat-footer button:hover {
+    background-color: #0056b3;
+}
+
+/* Messages */
+.message-item {
+    padding: 10px;
+    border-bottom: 1px solid #f0f2f5;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+}
+
+.message-item.own-message {
+    text-align: right;
+    background-color: #e6f7ff;
+}
+
+.message-item strong {
+    display: block;
+    font-weight: 600;
+}
+
+.message-item .text-sm {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+/* Custom Scrollbar */
+.chat-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-body::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: 4px;
+}
+
+.chat-body::-webkit-scrollbar-track {
+    background-color: #fafafa;
+}
+
+/* User List */
+.user-list {
+    width: 250px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-left: 20px;
+    height: 500px; /* Fixed height */
+    overflow-y: auto; /* Allow scrolling within user list */
+}
+
+.user-list h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.user-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-list li {
+    margin-bottom: 0.75rem;
+}
+
+.user-item {
+    padding: 10px;
+    border-bottom: 1px solid #f0f2f5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+}
+
+/* Flash Alerts */
+#flash-alert-container {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    width: auto;
+    z-index: 1000;
+}
+
+.flash-alert {
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    animation: fadeInOut 3s;
+    margin-bottom: 10px;
+}
+
+.flash-alert-info {
+    background-color: #007bff;
+}
+
+.flash-alert-success {
+    background-color: #28a745;
+}
+
+.flash-alert-warning {
+    background-color: #ffc107;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-20px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
+}
+
+============================================================
 Ordner: C:\xampp\htdocs\laravel\resources\js
+============================================================
+Datei: app.js
+Pfad: C:\xampp\htdocs\laravel\resources\js\app
+
+import './bootstrap';
+
+import Alpine from 'alpinejs';
+
+window.Alpine = Alpine;
+
+Alpine.start();
+
+
+============================================================
+Datei: bootstrap.js
+Pfad: C:\xampp\htdocs\laravel\resources\js\bootstrap
+
+/**
+ * We'll load the axios HTTP library which allows us to easily issue requests
+ * to our Laravel back-end. This library automatically handles sending the
+ * CSRF token as a header based on the value of the "XSRF" token cookie.
+ */
+
+import axios from 'axios';
+window.axios = axios;
+
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+
+import Echo from 'laravel-echo';
+import Pusher from 'pusher-js';
+
+window.Pusher = Pusher;
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: import.meta.env.VITE_PUSHER_APP_KEY,
+    cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+    wsHost: import.meta.env.VITE_WS_HOST || window.location.hostname,
+    wsPort: 6001,
+    forceTLS: false,
+    disableStats: true,
+    enabledTransports: ['ws', 'wss'],
+    authEndpoint: '/broadcasting/auth',
+    auth: {
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        }
+    }
+});
+
 ============================================================
 Ordner: C:\xampp\htdocs\laravel\resources\views
 ============================================================
@@ -2455,7 +2373,7 @@ Pfad: C:\xampp\htdocs\laravel\resources\views\welcome.blade
 ============================================================
 Datei: confirm-password.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\auth\confirm-password.blade
-
+.
 <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600">
         {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
@@ -2483,11 +2401,11 @@ Pfad: C:\xampp\htdocs\laravel\resources\views\auth\confirm-password.blade
         </div>
     </form>
 </x-guest-layout>
-
+.
 ============================================================
 Datei: forgot-password.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\auth\forgot-password.blade
-
+.
 <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600">
         {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
@@ -2513,11 +2431,11 @@ Pfad: C:\xampp\htdocs\laravel\resources\views\auth\forgot-password.blade
         </div>
     </form>
 </x-guest-layout>
-
+.
 ============================================================
 Datei: login.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\auth\login.blade
-
+.
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -2565,11 +2483,11 @@ Pfad: C:\xampp\htdocs\laravel\resources\views\auth\login.blade
         </div>
     </form>
 </x-guest-layout>
-
+.
 ============================================================
 Datei: register.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\auth\register.blade
-
+.
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
@@ -2622,11 +2540,11 @@ Pfad: C:\xampp\htdocs\laravel\resources\views\auth\register.blade
         </div>
     </form>
 </x-guest-layout>
-
+.
 ============================================================
 Datei: reset-password.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\auth\reset-password.blade
-
+.
 <x-guest-layout>
     <form method="POST" action="{{ route('password.store') }}">
         @csrf
@@ -2666,11 +2584,11 @@ Pfad: C:\xampp\htdocs\laravel\resources\views\auth\reset-password.blade
         </div>
     </form>
 </x-guest-layout>
-
+.
 ============================================================
 Datei: verify-email.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\auth\verify-email.blade
-
+.
 <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600">
         {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
@@ -2702,11 +2620,11 @@ Pfad: C:\xampp\htdocs\laravel\resources\views\auth\verify-email.blade
         </form>
     </div>
 </x-guest-layout>
-
+.
 ============================================================
 Datei: index.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\chatrooms\index.blade
-
+.
 <x-app-layout>
 
     <div class="main-container">
@@ -2728,11 +2646,11 @@ Pfad: C:\xampp\htdocs\laravel\resources\views\chatrooms\index.blade
         </div>
     </div>
 </x-app-layout>
-
+.
 ============================================================
 Datei: show.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\chatrooms\show.blade
-
+.
 <x-app-layout>
     <div class="main-container">
         <!-- Sidebar with other chat rooms -->
@@ -2922,19 +2840,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 </script>
-
+.
 ============================================================
 Datei: application-logo.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\application-logo.blade
-
+.
 <svg viewBox="0 0 316 316" xmlns="http://www.w3.org/2000/svg" {{ $attributes }}>
     <path d="M305.8 81.125C305.77 80.995 305.69 80.885 305.65 80.755C305.56 80.525 305.49 80.285 305.37 80.075C305.29 79.935 305.17 79.815 305.07 79.685C304.94 79.515 304.83 79.325 304.68 79.175C304.55 79.045 304.39 78.955 304.25 78.845C304.09 78.715 303.95 78.575 303.77 78.475L251.32 48.275C249.97 47.495 248.31 47.495 246.96 48.275L194.51 78.475C194.33 78.575 194.19 78.725 194.03 78.845C193.89 78.955 193.73 79.045 193.6 79.175C193.45 79.325 193.34 79.515 193.21 79.685C193.11 79.815 192.99 79.935 192.91 80.075C192.79 80.285 192.71 80.525 192.63 80.755C192.58 80.875 192.51 80.995 192.48 81.125C192.38 81.495 192.33 81.875 192.33 82.265V139.625L148.62 164.795V52.575C148.62 52.185 148.57 51.805 148.47 51.435C148.44 51.305 148.36 51.195 148.32 51.065C148.23 50.835 148.16 50.595 148.04 50.385C147.96 50.245 147.84 50.125 147.74 49.995C147.61 49.825 147.5 49.635 147.35 49.485C147.22 49.355 147.06 49.265 146.92 49.155C146.76 49.025 146.62 48.885 146.44 48.785L93.99 18.585C92.64 17.805 90.98 17.805 89.63 18.585L37.18 48.785C37 48.885 36.86 49.035 36.7 49.155C36.56 49.265 36.4 49.355 36.27 49.485C36.12 49.635 36.01 49.825 35.88 49.995C35.78 50.125 35.66 50.245 35.58 50.385C35.46 50.595 35.38 50.835 35.3 51.065C35.25 51.185 35.18 51.305 35.15 51.435C35.05 51.805 35 52.185 35 52.575V232.235C35 233.795 35.84 235.245 37.19 236.025L142.1 296.425C142.33 296.555 142.58 296.635 142.82 296.725C142.93 296.765 143.04 296.835 143.16 296.865C143.53 296.965 143.9 297.015 144.28 297.015C144.66 297.015 145.03 296.965 145.4 296.865C145.5 296.835 145.59 296.775 145.69 296.745C145.95 296.655 146.21 296.565 146.45 296.435L251.36 236.035C252.72 235.255 253.55 233.815 253.55 232.245V174.885L303.81 145.945C305.17 145.165 306 143.725 306 142.155V82.265C305.95 81.875 305.89 81.495 305.8 81.125ZM144.2 227.205L100.57 202.515L146.39 176.135L196.66 147.195L240.33 172.335L208.29 190.625L144.2 227.205ZM244.75 114.995V164.795L226.39 154.225L201.03 139.625V89.825L219.39 100.395L244.75 114.995ZM249.12 57.105L292.81 82.265L249.12 107.425L205.43 82.265L249.12 57.105ZM114.49 184.425L96.13 194.995V85.305L121.49 70.705L139.85 60.135V169.815L114.49 184.425ZM91.76 27.425L135.45 52.585L91.76 77.745L48.07 52.585L91.76 27.425ZM43.67 60.135L62.03 70.705L87.39 85.305V202.545V202.555V202.565C87.39 202.735 87.44 202.895 87.46 203.055C87.49 203.265 87.49 203.485 87.55 203.695V203.705C87.6 203.875 87.69 204.035 87.76 204.195C87.84 204.375 87.89 204.575 87.99 204.745C87.99 204.745 87.99 204.755 88 204.755C88.09 204.905 88.22 205.035 88.33 205.175C88.45 205.335 88.55 205.495 88.69 205.635L88.7 205.645C88.82 205.765 88.98 205.855 89.12 205.965C89.28 206.085 89.42 206.225 89.59 206.325C89.6 206.325 89.6 206.325 89.61 206.335C89.62 206.335 89.62 206.345 89.63 206.345L139.87 234.775V285.065L43.67 229.705V60.135ZM244.75 229.705L148.58 285.075V234.775L219.8 194.115L244.75 179.875V229.705ZM297.2 139.625L253.49 164.795V114.995L278.85 100.395L297.21 89.825V139.625H297.2Z"/>
 </svg>
-
+.
 ============================================================
 Datei: auth-session-status.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\auth-session-status.blade
-
+.
 @props(['status'])
 
 @if ($status)
@@ -2942,25 +2860,25 @@ Pfad: C:\xampp\htdocs\laravel\resources\views\components\auth-session-status.bla
         {{ $status }}
     </div>
 @endif
-
+.
 ============================================================
 Datei: danger-button.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\danger-button.blade
-
+.
 <button {{ $attributes->merge(['type' => 'submit', 'class' => 'inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150']) }}>
     {{ $slot }}
 </button>
-
+.
 ============================================================
 Datei: dropdown-link.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\dropdown-link.blade
-
+.
 <a {{ $attributes->merge(['class' => 'block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out']) }}>{{ $slot }}</a>
-
+.
 ============================================================
 Datei: dropdown.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\dropdown.blade
-
+.
 @props(['align' => 'right', 'width' => '48', 'contentClasses' => 'py-1 bg-white'])
 
 @php
@@ -3004,11 +2922,11 @@ switch ($width) {
         </div>
     </div>
 </div>
-
+.
 ============================================================
 Datei: input-error.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\input-error.blade
-
+.
 @props(['messages'])
 
 @if ($messages)
@@ -3018,21 +2936,21 @@ Pfad: C:\xampp\htdocs\laravel\resources\views\components\input-error.blade
         @endforeach
     </ul>
 @endif
-
+.
 ============================================================
 Datei: input-label.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\input-label.blade
-
+.
 @props(['value'])
 
 <label {{ $attributes->merge(['class' => 'block font-medium text-sm text-gray-700']) }}>
     {{ $value ?? $slot }}
 </label>
-
+.
 ============================================================
 Datei: modal.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\modal.blade
-
+.
 @props([
     'name',
     'show' => false,
@@ -3111,11 +3029,11 @@ $maxWidth = [
         {{ $slot }}
     </div>
 </div>
-
+.
 ============================================================
 Datei: nav-link.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\nav-link.blade
-
+.
 @props(['active'])
 
 @php
@@ -3127,19 +3045,19 @@ $classes = ($active ?? false)
 <a {{ $attributes->merge(['class' => $classes]) }}>
     {{ $slot }}
 </a>
-
+.
 ============================================================
 Datei: primary-button.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\primary-button.blade
-
+.
 <button {{ $attributes->merge(['type' => 'submit', 'class' => 'inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150']) }}>
     {{ $slot }}
 </button>
-
+.
 ============================================================
 Datei: responsive-nav-link.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\responsive-nav-link.blade
-
+.
 @props(['active'])
 
 @php
@@ -3151,27 +3069,27 @@ $classes = ($active ?? false)
 <a {{ $attributes->merge(['class' => $classes]) }}>
     {{ $slot }}
 </a>
-
+.
 ============================================================
 Datei: secondary-button.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\secondary-button.blade
-
+.
 <button {{ $attributes->merge(['type' => 'button', 'class' => 'inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150']) }}>
     {{ $slot }}
 </button>
-
+.
 ============================================================
 Datei: text-input.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\text-input.blade
-
+.
 @props(['disabled' => false])
 
 <input {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge(['class' => 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm']) !!}>
-
+.
 ============================================================
 Datei: app.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\layouts\app.blade
-
+.
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -3199,11 +3117,11 @@ Pfad: C:\xampp\htdocs\laravel\resources\views\layouts\app.blade
         </div>
     </body>
 </html>
-
+.
 ============================================================
 Datei: guest.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\layouts\guest.blade
-
+.
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -3234,11 +3152,11 @@ Pfad: C:\xampp\htdocs\laravel\resources\views\layouts\guest.blade
         </div>
     </body>
 </html>
-
+.
 ============================================================
 Datei: navigation.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\layouts\navigation.blade
-
+.
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -3365,11 +3283,11 @@ Pfad: C:\xampp\htdocs\laravel\resources\views\layouts\navigation.blade
         });
     }
 </script>
-
+.
 ============================================================
 Datei: edit.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\profile\edit.blade
-
+.
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -3399,11 +3317,11 @@ Pfad: C:\xampp\htdocs\laravel\resources\views\profile\edit.blade
         </div>
     </div>
 </x-app-layout>
-
+.
 ============================================================
 Datei: delete-user-form.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\profile\partials\delete-user-form.blade
-
+.
 <section class="space-y-6">
     <header>
         <h2 class="text-lg font-medium text-gray-900">
@@ -3459,11 +3377,11 @@ Pfad: C:\xampp\htdocs\laravel\resources\views\profile\partials\delete-user-form.
         </form>
     </x-modal>
 </section>
-
+.
 ============================================================
 Datei: update-password-form.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\profile\partials\update-password-form.blade
-
+.
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
@@ -3512,11 +3430,11 @@ Pfad: C:\xampp\htdocs\laravel\resources\views\profile\partials\update-password-f
         </div>
     </form>
 </section>
-
+.
 ============================================================
 Datei: update-profile-information-form.blade.php
 Pfad: C:\xampp\htdocs\laravel\resources\views\profile\partials\update-profile-information-form.blade
-
+.
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
@@ -3581,1319 +3499,7 @@ Pfad: C:\xampp\htdocs\laravel\resources\views\profile\partials\update-profile-in
         </div>
     </form>
 </section>
-
-============================================================
-Datei: confirm-password.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\auth\confirm-password.blade
-
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
-    </div>
-
-    <form method="POST" action="{{ route('password.confirm') }}">
-        @csrf
-
-        <!-- Password -->
-        <div>
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <div class="flex justify-end mt-4">
-            <x-primary-button>
-                {{ __('Confirm') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
-
-============================================================
-Datei: forgot-password.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\auth\forgot-password.blade
-
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-    </div>
-
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('password.email') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
-
-============================================================
-Datei: login.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\auth\login.blade
-
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
-
-============================================================
-Datei: register.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\auth\register.blade
-
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
-
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
-
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
-
-============================================================
-Datei: reset-password.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\auth\reset-password.blade
-
-<x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
-        @csrf
-
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
-
-============================================================
-Datei: verify-email.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\auth\verify-email.blade
-
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
-    </div>
-
-    @if (session('status') == 'verification-link-sent')
-        <div class="mb-4 font-medium text-sm text-green-600">
-            {{ __('A new verification link has been sent to the email address you provided during registration.') }}
-        </div>
-    @endif
-
-    <div class="mt-4 flex items-center justify-between">
-        <form method="POST" action="{{ route('verification.send') }}">
-            @csrf
-
-            <div>
-                <x-primary-button>
-                    {{ __('Resend Verification Email') }}
-                </x-primary-button>
-            </div>
-        </form>
-
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-
-            <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                {{ __('Log Out') }}
-            </button>
-        </form>
-    </div>
-</x-guest-layout>
-
-============================================================
-Datei: index.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\chatrooms\index.blade
-
-<x-app-layout>
-
-    <div class="main-container">
-
-        <!-- Main chat area -->
-        <div class="chat-container">
-            <div class="chat-header">
-            <h2 class="text-2xl font-bold mb-5">Chat Rooms</h2>
-            </div>
-            <div class="chat-body">
-            <ul>
-                    @foreach ($chatRooms as $chatRoom)
-                        <li class="mb-3">
-                            <a href="{{ url('/chatrooms', $chatRoom->id) }}" class="text-blue-500">{{ $chatRoom->name }}</a>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
-    </div>
-</x-app-layout>
-
-============================================================
-Datei: show.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\chatrooms\show.blade
-
-<x-app-layout>
-    <div class="main-container">
-        <!-- Sidebar with other chat rooms -->
-        <div class="sidebar">
-            <h3>Other Chat Rooms</h3>
-            <ul>
-                @foreach ($otherChatRooms as $otherChatRoom)
-                    <li>
-                        <a href="javascript:void(0)" onclick="switchRoom({{ $otherChatRoom->id }}, '{{ $otherChatRoom->name }}')">
-                            {{ $otherChatRoom->name }}
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-            <button class="leave-room-btn" onclick="leaveRoom()">Leave Room</button>
-        </div>
-
-        <!-- Main chat area -->
-        <div class="chat-container">
-            <div class="chat-header">
-                <h3>{{ $chatRoom->name }}</h3>
-            </div>
-            <div id="messages" class="chat-body">
-                @foreach ($messages as $message)
-                    <div class="message-item {{ $message->user_id == Auth::id() ? 'own-message' : '' }}">
-                        <div>
-                            <strong>{{ $message->user->name }}:</strong> {{ $message->message }}
-                        </div>
-                        <div class="text-sm text-gray-500">
-                            {{ $message->created_at->format('d.m.Y H:i') }}
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            <div class="chat-footer">
-                <form id="sendMessageForm" class="flex w-full">
-                    @csrf
-                    <input type="hidden" name="chat_room_id" value="{{ $chatRoom->id }}">
-                    <input id="messageInput" type="text" name="message" class="p-2 border rounded-lg flex-grow" placeholder="Type your message...">
-                    <button type="submit" class="bg-blue-500 text-white rounded-lg hover:bg-blue-700 p-2">Send</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- User list area -->
-        <div class="user-list">
-            <h3>Users in Room</h3>
-            <ul id="user-list">
-                <!-- Current user should always be at the top -->
-                <li id="user-{{ Auth::id() }}" class="user-item">{{ Auth::user()->name }}</li>
-                @foreach ($usersInRoom as $user)
-                    @if ($user->id != Auth::id())
-                        <li id="user-{{ $user->id }}" class="user-item">{{ $user->name }}</li>
-                    @endif
-                @endforeach
-            </ul>
-        </div>
-    </div>
-    <div id="flash-alert-container"></div>
-    <input type="hidden" id="chatRoomId" value="{{ $chatRoom->id }}">
-</x-app-layout>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    function sendMessage() {
-        const messageInput = document.getElementById('messageInput');
-        const chatRoomId = document.getElementById('chatRoomId').value;
-
-        axios.post(`/chatrooms/${chatRoomId}/messages`, {
-            message: messageInput.value,
-        }).then(response => {
-            messageInput.value = '';
-        }).catch(error => {
-            console.error('Error sending message:', error);
-        });
-    }
-
-    function switchRoom(newRoomId, newRoomName) {
-        axios.post('{{ route("chatrooms.switch") }}', {
-            chat_room_id: newRoomId,
-            chat_room_name: newRoomName,
-        }).then(response => {
-            window.location.href = `/chatrooms/${newRoomId}`;
-        }).catch(error => {
-            console.error('Error switching room:', error);
-        });
-    }
-
-    function leaveRoom() {
-        axios.post('{{ route("chatrooms.leave") }}', {
-            chat_room_id: '{{ session("chat_room_id") }}',
-        }).then(response => {
-            window.location.href = '{{ route("chatrooms.index") }}';
-        }).catch(error => {
-            console.error('Error leaving room:', error);
-        });
-    }
-
-    function showFlashAlert(message, type = 'info') {
-        const existingAlert = document.querySelector('.flash-alert');
-        if (existingAlert) {
-            existingAlert.remove();
-        }
-
-        const flashAlert = document.createElement('div');
-        flashAlert.classList.add('flash-alert', `flash-alert-${type}`);
-        flashAlert.innerText = message;
-
-        document.getElementById('flash-alert-container').appendChild(flashAlert);
-
-        setTimeout(() => {
-            flashAlert.remove();
-        }, 3000); // Remove after 3 seconds
-    }
-
-    if (typeof window.Echo !== 'undefined') {
-        window.Echo.private(`chatroom.${document.getElementById('chatRoomId').value}`)
-            .listen('MessageSent', (e) => {
-                const messagesDiv = document.getElementById('messages');
-                const newMessageDiv = document.createElement('div');
-                newMessageDiv.classList.add('message-item');
-                if (e.user.id == {{ Auth::id() }}) {
-                    newMessageDiv.classList.add('own-message');
-                }
-                newMessageDiv.innerHTML = `
-                    <div>
-                        <strong>${e.user.name}:</strong> ${e.message.message}
-                    </div>
-                    <div class="text-sm text-gray-500">
-                        ${new Date(e.message.created_at).toLocaleString()}
-                    </div>
-                `;
-                messagesDiv.appendChild(newMessageDiv);
-                messagesDiv.scrollTop = messagesDiv.scrollHeight;
-            })
-            .listen('UserJoinedRoom', (e) => {
-                const userList = document.getElementById('user-list');
-                const existingUserItem = document.getElementById(`user-${e.user.id}`);
-
-                // Check if the user is already in the list
-                if (!existingUserItem) {
-                    const newUserItem = document.createElement('li');
-                    newUserItem.classList.add('user-item');
-                    newUserItem.id = `user-${e.user.id}`;
-                    newUserItem.innerHTML = `<div>${e.user.name}</div>`;
-                    userList.appendChild(newUserItem);
-                }
-
-                // Show flash alert for user joining
-                if (e.user.id == {{ Auth::id() }}) {
-                    showFlashAlert(`You joined Room: ${e.chatRoom.name}`, 'success');
-                } else {
-                    showFlashAlert(`${e.user.name} joined the room`, 'success');
-                }
-            })
-            .listen('UserLeftRoom', (e) => {
-                const userItem = document.getElementById(`user-${e.user.id}`);
-                if (userItem) {
-                    userItem.remove();
-                }
-
-                // Show flash alert for user leaving
-                if (e.user.id != {{ Auth::id() }}) {
-                    showFlashAlert(`${e.user.name} left the room`, 'warning');
-                }
-            });
-    }
-
-    window.sendMessage = sendMessage;
-    window.switchRoom = switchRoom;
-    window.leaveRoom = leaveRoom;
-
-    const messagesDiv = document.getElementById('messages');
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
-
-    document.getElementById('sendMessageForm').addEventListener('submit', function (e) {
-        e.preventDefault();
-        sendMessage();
-    });
-
-    document.getElementById('messageInput').addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            sendMessage();
-        }
-    });
-
-});
-</script>
-
-============================================================
-Datei: application-logo.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\components\application-logo.blade
-
-<svg viewBox="0 0 316 316" xmlns="http://www.w3.org/2000/svg" {{ $attributes }}>
-    <path d="M305.8 81.125C305.77 80.995 305.69 80.885 305.65 80.755C305.56 80.525 305.49 80.285 305.37 80.075C305.29 79.935 305.17 79.815 305.07 79.685C304.94 79.515 304.83 79.325 304.68 79.175C304.55 79.045 304.39 78.955 304.25 78.845C304.09 78.715 303.95 78.575 303.77 78.475L251.32 48.275C249.97 47.495 248.31 47.495 246.96 48.275L194.51 78.475C194.33 78.575 194.19 78.725 194.03 78.845C193.89 78.955 193.73 79.045 193.6 79.175C193.45 79.325 193.34 79.515 193.21 79.685C193.11 79.815 192.99 79.935 192.91 80.075C192.79 80.285 192.71 80.525 192.63 80.755C192.58 80.875 192.51 80.995 192.48 81.125C192.38 81.495 192.33 81.875 192.33 82.265V139.625L148.62 164.795V52.575C148.62 52.185 148.57 51.805 148.47 51.435C148.44 51.305 148.36 51.195 148.32 51.065C148.23 50.835 148.16 50.595 148.04 50.385C147.96 50.245 147.84 50.125 147.74 49.995C147.61 49.825 147.5 49.635 147.35 49.485C147.22 49.355 147.06 49.265 146.92 49.155C146.76 49.025 146.62 48.885 146.44 48.785L93.99 18.585C92.64 17.805 90.98 17.805 89.63 18.585L37.18 48.785C37 48.885 36.86 49.035 36.7 49.155C36.56 49.265 36.4 49.355 36.27 49.485C36.12 49.635 36.01 49.825 35.88 49.995C35.78 50.125 35.66 50.245 35.58 50.385C35.46 50.595 35.38 50.835 35.3 51.065C35.25 51.185 35.18 51.305 35.15 51.435C35.05 51.805 35 52.185 35 52.575V232.235C35 233.795 35.84 235.245 37.19 236.025L142.1 296.425C142.33 296.555 142.58 296.635 142.82 296.725C142.93 296.765 143.04 296.835 143.16 296.865C143.53 296.965 143.9 297.015 144.28 297.015C144.66 297.015 145.03 296.965 145.4 296.865C145.5 296.835 145.59 296.775 145.69 296.745C145.95 296.655 146.21 296.565 146.45 296.435L251.36 236.035C252.72 235.255 253.55 233.815 253.55 232.245V174.885L303.81 145.945C305.17 145.165 306 143.725 306 142.155V82.265C305.95 81.875 305.89 81.495 305.8 81.125ZM144.2 227.205L100.57 202.515L146.39 176.135L196.66 147.195L240.33 172.335L208.29 190.625L144.2 227.205ZM244.75 114.995V164.795L226.39 154.225L201.03 139.625V89.825L219.39 100.395L244.75 114.995ZM249.12 57.105L292.81 82.265L249.12 107.425L205.43 82.265L249.12 57.105ZM114.49 184.425L96.13 194.995V85.305L121.49 70.705L139.85 60.135V169.815L114.49 184.425ZM91.76 27.425L135.45 52.585L91.76 77.745L48.07 52.585L91.76 27.425ZM43.67 60.135L62.03 70.705L87.39 85.305V202.545V202.555V202.565C87.39 202.735 87.44 202.895 87.46 203.055C87.49 203.265 87.49 203.485 87.55 203.695V203.705C87.6 203.875 87.69 204.035 87.76 204.195C87.84 204.375 87.89 204.575 87.99 204.745C87.99 204.745 87.99 204.755 88 204.755C88.09 204.905 88.22 205.035 88.33 205.175C88.45 205.335 88.55 205.495 88.69 205.635L88.7 205.645C88.82 205.765 88.98 205.855 89.12 205.965C89.28 206.085 89.42 206.225 89.59 206.325C89.6 206.325 89.6 206.325 89.61 206.335C89.62 206.335 89.62 206.345 89.63 206.345L139.87 234.775V285.065L43.67 229.705V60.135ZM244.75 229.705L148.58 285.075V234.775L219.8 194.115L244.75 179.875V229.705ZM297.2 139.625L253.49 164.795V114.995L278.85 100.395L297.21 89.825V139.625H297.2Z"/>
-</svg>
-
-============================================================
-Datei: auth-session-status.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\components\auth-session-status.blade
-
-@props(['status'])
-
-@if ($status)
-    <div {{ $attributes->merge(['class' => 'font-medium text-sm text-green-600']) }}>
-        {{ $status }}
-    </div>
-@endif
-
-============================================================
-Datei: danger-button.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\components\danger-button.blade
-
-<button {{ $attributes->merge(['type' => 'submit', 'class' => 'inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150']) }}>
-    {{ $slot }}
-</button>
-
-============================================================
-Datei: dropdown-link.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\components\dropdown-link.blade
-
-<a {{ $attributes->merge(['class' => 'block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out']) }}>{{ $slot }}</a>
-
-============================================================
-Datei: dropdown.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\components\dropdown.blade
-
-@props(['align' => 'right', 'width' => '48', 'contentClasses' => 'py-1 bg-white'])
-
-@php
-switch ($align) {
-    case 'left':
-        $alignmentClasses = 'ltr:origin-top-left rtl:origin-top-right start-0';
-        break;
-    case 'top':
-        $alignmentClasses = 'origin-top';
-        break;
-    case 'right':
-    default:
-        $alignmentClasses = 'ltr:origin-top-right rtl:origin-top-left end-0';
-        break;
-}
-
-switch ($width) {
-    case '48':
-        $width = 'w-48';
-        break;
-}
-@endphp
-
-<div class="relative" x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
-    <div @click="open = ! open">
-        {{ $trigger }}
-    </div>
-
-    <div x-show="open"
-            x-transition:enter="transition ease-out duration-200"
-            x-transition:enter-start="opacity-0 scale-95"
-            x-transition:enter-end="opacity-100 scale-100"
-            x-transition:leave="transition ease-in duration-75"
-            x-transition:leave-start="opacity-100 scale-100"
-            x-transition:leave-end="opacity-0 scale-95"
-            class="absolute z-50 mt-2 {{ $width }} rounded-md shadow-lg {{ $alignmentClasses }}"
-            style="display: none;"
-            @click="open = false">
-        <div class="rounded-md ring-1 ring-black ring-opacity-5 {{ $contentClasses }}">
-            {{ $content }}
-        </div>
-    </div>
-</div>
-
-============================================================
-Datei: input-error.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\components\input-error.blade
-
-@props(['messages'])
-
-@if ($messages)
-    <ul {{ $attributes->merge(['class' => 'text-sm text-red-600 space-y-1']) }}>
-        @foreach ((array) $messages as $message)
-            <li>{{ $message }}</li>
-        @endforeach
-    </ul>
-@endif
-
-============================================================
-Datei: input-label.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\components\input-label.blade
-
-@props(['value'])
-
-<label {{ $attributes->merge(['class' => 'block font-medium text-sm text-gray-700']) }}>
-    {{ $value ?? $slot }}
-</label>
-
-============================================================
-Datei: modal.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\components\modal.blade
-
-@props([
-    'name',
-    'show' => false,
-    'maxWidth' => '2xl'
-])
-
-@php
-$maxWidth = [
-    'sm' => 'sm:max-w-sm',
-    'md' => 'sm:max-w-md',
-    'lg' => 'sm:max-w-lg',
-    'xl' => 'sm:max-w-xl',
-    '2xl' => 'sm:max-w-2xl',
-][$maxWidth];
-@endphp
-
-<div
-    x-data="{
-        show: @js($show),
-        focusables() {
-            // All focusable element types...
-            let selector = 'a, button, input:not([type=\'hidden\']), textarea, select, details, [tabindex]:not([tabindex=\'-1\'])'
-            return [...$el.querySelectorAll(selector)]
-                // All non-disabled elements...
-                .filter(el => ! el.hasAttribute('disabled'))
-        },
-        firstFocusable() { return this.focusables()[0] },
-        lastFocusable() { return this.focusables().slice(-1)[0] },
-        nextFocusable() { return this.focusables()[this.nextFocusableIndex()] || this.firstFocusable() },
-        prevFocusable() { return this.focusables()[this.prevFocusableIndex()] || this.lastFocusable() },
-        nextFocusableIndex() { return (this.focusables().indexOf(document.activeElement) + 1) % (this.focusables().length + 1) },
-        prevFocusableIndex() { return Math.max(0, this.focusables().indexOf(document.activeElement)) -1 },
-    }"
-    x-init="$watch('show', value => {
-        if (value) {
-            document.body.classList.add('overflow-y-hidden');
-            {{ $attributes->has('focusable') ? 'setTimeout(() => firstFocusable().focus(), 100)' : '' }}
-        } else {
-            document.body.classList.remove('overflow-y-hidden');
-        }
-    })"
-    x-on:open-modal.window="$event.detail == '{{ $name }}' ? show = true : null"
-    x-on:close-modal.window="$event.detail == '{{ $name }}' ? show = false : null"
-    x-on:close.stop="show = false"
-    x-on:keydown.escape.window="show = false"
-    x-on:keydown.tab.prevent="$event.shiftKey || nextFocusable().focus()"
-    x-on:keydown.shift.tab.prevent="prevFocusable().focus()"
-    x-show="show"
-    class="fixed inset-0 overflow-y-auto px-4 py-6 sm:px-0 z-50"
-    style="display: {{ $show ? 'block' : 'none' }};"
->
-    <div
-        x-show="show"
-        class="fixed inset-0 transform transition-all"
-        x-on:click="show = false"
-        x-transition:enter="ease-out duration-300"
-        x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100"
-        x-transition:leave="ease-in duration-200"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
-    >
-        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-    </div>
-
-    <div
-        x-show="show"
-        class="mb-6 bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full {{ $maxWidth }} sm:mx-auto"
-        x-transition:enter="ease-out duration-300"
-        x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-        x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-        x-transition:leave="ease-in duration-200"
-        x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-        x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-    >
-        {{ $slot }}
-    </div>
-</div>
-
-============================================================
-Datei: nav-link.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\components\nav-link.blade
-
-@props(['active'])
-
-@php
-$classes = ($active ?? false)
-            ? 'inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out'
-            : 'inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out';
-@endphp
-
-<a {{ $attributes->merge(['class' => $classes]) }}>
-    {{ $slot }}
-</a>
-
-============================================================
-Datei: primary-button.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\components\primary-button.blade
-
-<button {{ $attributes->merge(['type' => 'submit', 'class' => 'inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150']) }}>
-    {{ $slot }}
-</button>
-
-============================================================
-Datei: responsive-nav-link.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\components\responsive-nav-link.blade
-
-@props(['active'])
-
-@php
-$classes = ($active ?? false)
-            ? 'block w-full ps-3 pe-4 py-2 border-l-4 border-indigo-400 text-start text-base font-medium text-indigo-700 bg-indigo-50 focus:outline-none focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700 transition duration-150 ease-in-out'
-            : 'block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out';
-@endphp
-
-<a {{ $attributes->merge(['class' => $classes]) }}>
-    {{ $slot }}
-</a>
-
-============================================================
-Datei: secondary-button.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\components\secondary-button.blade
-
-<button {{ $attributes->merge(['type' => 'button', 'class' => 'inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150']) }}>
-    {{ $slot }}
-</button>
-
-============================================================
-Datei: text-input.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\components\text-input.blade
-
-@props(['disabled' => false])
-
-<input {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge(['class' => 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm']) !!}>
-
-============================================================
-Datei: app.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\layouts\app.blade
-
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-    </body>
-</html>
-
-============================================================
-Datei: guest.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\layouts\guest.blade
-
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
-        </div>
-    </body>
-</html>
-
-============================================================
-Datei: navigation.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\layouts\navigation.blade
-
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
-    <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('chatrooms.index') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
-                </div>
-            </div>
-
-            <!-- Navigation Links -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
-                @if(session('chat_room_id'))
-                    <div class="relative">
-                        <button @click="open = ! open" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <span>{{ session('chat_room_name') }}</span>
-                            <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </button>
-                        <div x-show="open" @click.away="open = false" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5">
-                            <a href="javascript:void(0);" onclick="leaveRoom()" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Raum verlassen</a>
-                        </div>
-                    </div>
-                @else
-                    <a href="{{ route('chatrooms.index') }}" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                        Raumliste
-                    </a>
-                @endif
-            </div>
-
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
-
-                            <div class="ml-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
-
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
-                    </x-slot>
-                </x-dropdown>
-            </div>
-
-            <!-- Hamburger -->
-            <div class="-mr-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('chatrooms.index')" :active="request()->routeIs('chatrooms.index')">
-                Raumliste
-            </x-responsive-nav-link>
-        </div>
-
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-            </div>
-
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
-
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
-                </form>
-            </div>
-        </div>
-    </div>
-</nav>
-
-<script>
-    function leaveRoom() {
-        axios.post('{{ route('chatrooms.leave') }}', {
-            chat_room_id: '{{ session('chat_room_id') }}',
-        }).then(response => {
-            window.location.href = '{{ route('chatrooms.index') }}';
-        }).catch(error => {
-            console.error('Error leaving room:', error);
-        });
-    }
-</script>
-
-============================================================
-Datei: edit.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\profile\edit.blade
-
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
-            </div>
-
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
-
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout>
-
-============================================================
-Datei: delete-user-form.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\profile\partials\delete-user-form.blade
-
-<section class="space-y-6">
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Delete Account') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
-        </p>
-    </header>
-
-    <x-danger-button
-        x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >{{ __('Delete Account') }}</x-danger-button>
-
-    <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-        <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
-            @csrf
-            @method('delete')
-
-            <h2 class="text-lg font-medium text-gray-900">
-                {{ __('Are you sure you want to delete your account?') }}
-            </h2>
-
-            <p class="mt-1 text-sm text-gray-600">
-                {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
-            </p>
-
-            <div class="mt-6">
-                <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
-
-                <x-text-input
-                    id="password"
-                    name="password"
-                    type="password"
-                    class="mt-1 block w-3/4"
-                    placeholder="{{ __('Password') }}"
-                />
-
-                <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
-            </div>
-
-            <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
-
-                <x-danger-button class="ms-3">
-                    {{ __('Delete Account') }}
-                </x-danger-button>
-            </div>
-        </form>
-    </x-modal>
-</section>
-
-============================================================
-Datei: update-password-form.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\profile\partials\update-password-form.blade
-
-<section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Update Password') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
-        </p>
-    </header>
-
-    <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
-        @csrf
-        @method('put')
-
-        <div>
-            <x-input-label for="update_password_current_password" :value="__('Current Password')" />
-            <x-text-input id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
-            <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
-        </div>
-
-        <div>
-            <x-input-label for="update_password_password" :value="__('New Password')" />
-            <x-text-input id="update_password_password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
-        </div>
-
-        <div>
-            <x-input-label for="update_password_password_confirmation" :value="__('Confirm Password')" />
-            <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-            @if (session('status') === 'password-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
-            @endif
-        </div>
-    </form>
-</section>
-
-============================================================
-Datei: update-profile-information-form.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\profile\partials\update-profile-information-form.blade
-
-<section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
-        </p>
-    </header>
-
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-        @csrf
-    </form>
-
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
-        @csrf
-        @method('patch')
-
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
-        </div>
-
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
-
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800">
-                        {{ __('Your email address is unverified.') }}
-
-                        <button form="send-verification" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            {{ __('Click here to re-send the verification email.') }}
-                        </button>
-                    </p>
-
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600">
-                            {{ __('A new verification link has been sent to your email address.') }}
-                        </p>
-                    @endif
-                </div>
-            @endif
-        </div>
-
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
-            @endif
-        </div>
-    </form>
-</section>
-
-============================================================
-Datei: delete-user-form.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\profile\partials\delete-user-form.blade
-
-<section class="space-y-6">
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Delete Account') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
-        </p>
-    </header>
-
-    <x-danger-button
-        x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >{{ __('Delete Account') }}</x-danger-button>
-
-    <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-        <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
-            @csrf
-            @method('delete')
-
-            <h2 class="text-lg font-medium text-gray-900">
-                {{ __('Are you sure you want to delete your account?') }}
-            </h2>
-
-            <p class="mt-1 text-sm text-gray-600">
-                {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
-            </p>
-
-            <div class="mt-6">
-                <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
-
-                <x-text-input
-                    id="password"
-                    name="password"
-                    type="password"
-                    class="mt-1 block w-3/4"
-                    placeholder="{{ __('Password') }}"
-                />
-
-                <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
-            </div>
-
-            <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
-
-                <x-danger-button class="ms-3">
-                    {{ __('Delete Account') }}
-                </x-danger-button>
-            </div>
-        </form>
-    </x-modal>
-</section>
-
-============================================================
-Datei: update-password-form.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\profile\partials\update-password-form.blade
-
-<section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Update Password') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
-        </p>
-    </header>
-
-    <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
-        @csrf
-        @method('put')
-
-        <div>
-            <x-input-label for="update_password_current_password" :value="__('Current Password')" />
-            <x-text-input id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
-            <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
-        </div>
-
-        <div>
-            <x-input-label for="update_password_password" :value="__('New Password')" />
-            <x-text-input id="update_password_password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
-        </div>
-
-        <div>
-            <x-input-label for="update_password_password_confirmation" :value="__('Confirm Password')" />
-            <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-            @if (session('status') === 'password-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
-            @endif
-        </div>
-    </form>
-</section>
-
-============================================================
-Datei: update-profile-information-form.blade.php
-Pfad: C:\xampp\htdocs\laravel\resources\views\profile\partials\update-profile-information-form.blade
-
-<section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
-        </p>
-    </header>
-
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-        @csrf
-    </form>
-
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
-        @csrf
-        @method('patch')
-
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
-        </div>
-
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
-
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800">
-                        {{ __('Your email address is unverified.') }}
-
-                        <button form="send-verification" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            {{ __('Click here to re-send the verification email.') }}
-                        </button>
-                    </p>
-
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600">
-                            {{ __('A new verification link has been sent to your email address.') }}
-                        </p>
-                    @endif
-                </div>
-            @endif
-        </div>
-
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
-            @endif
-        </div>
-    </form>
-</section>
-
+.
 ============================================================
 Ordner: C:\xampp\htdocs\laravel\routes
 ============================================================
