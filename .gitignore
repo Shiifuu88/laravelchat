@@ -1,7 +1,5 @@
-# Ignoriere alle Dateien und Ordner
 *
 
-# Erlaube die folgenden spezifischen Ordner und deren Inhalt
 !/app/
 !/database/
 !/resources/
