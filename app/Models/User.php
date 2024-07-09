@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -58,4 +59,14 @@ class User extends Authenticatable
         return $this->hasOne(Session::class);
     }
 
+    
+    public function currentRoom()
+    {
+        $session = DB::table('sessions')
+            ->where('user_id', $this->id)
+            ->whereNotNull('chat_room_id')
+            ->first();
+
+        return $session ? $session->chat_room_id : null;
+    }
 }

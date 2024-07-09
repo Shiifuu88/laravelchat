@@ -68,22 +68,16 @@ class ChatRoomController extends Controller
         session(['chat_room_id' => $chatRoomId, 'chat_room_name' => $chatRoomName]);
     }
 
-    public function leaveRoom(Request $request)
+    public function leaveRoom(Request $request, $chatRoomId)
     {
-        $chatRoomId = $request->input('chat_room_id');
         $user = Auth::user();
+        $chatRoom = ChatRoom::find($chatRoomId);
 
-        event(new UserLeftRoom($user, $chatRoomId));
+        if ($chatRoom && $user) {
+            $chatRoom->users()->detach($user->id);
+            event(new UserLeftRoom($user, $chatRoomId));
+        }
 
-        // Clear session
-        session()->forget('chat_room_id');
-        session()->forget('chat_room_name');
-
-        Session::where('id', session()->getId())->update([
-            'chat_room_id' => null,
-            'chat_room_name' => null,
-        ]);
-
-        return response()->json(['status' => 'left']);
+        return redirect()->route('chatrooms.index')->with('status', 'You have left the room');
     }
 }

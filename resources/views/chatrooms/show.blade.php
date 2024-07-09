@@ -12,7 +12,10 @@
                     </li>
                 @endforeach
             </ul>
-            <button class="leave-room-btn" onclick="leaveRoom()">Leave Room</button>
+            <form id="leaveRoomForm" method="POST" action="{{ route('chatrooms.leave', $chatRoom->id) }}">
+                @csrf
+                <button type="submit" class="leave-room-btn">{{ __('Leave Room') }}</button>
+            </form>
         </div>
 
         <!-- Main chat area -->
@@ -46,7 +49,6 @@
         <div class="user-list">
             <h3>Users in Room</h3>
             <ul id="user-list">
-                <!-- Current user should always be at the top -->
                 <li id="user-{{ Auth::id() }}" class="user-item">{{ Auth::user()->name }}</li>
                 @foreach ($usersInRoom as $user)
                     @if ($user->id != Auth::id())
@@ -87,13 +89,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function leaveRoom() {
-        axios.post('{{ route("chatrooms.leave") }}', {
-            chat_room_id: '{{ session("chat_room_id") }}',
-        }).then(response => {
-            window.location.href = '{{ route("chatrooms.index") }}';
-        }).catch(error => {
-            console.error('Error leaving room:', error);
-        });
+        const leaveRoomForm = document.getElementById('leaveRoomForm');
+        leaveRoomForm.submit();
     }
 
     function showFlashAlert(message, type = 'info') {
@@ -137,7 +134,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 const userList = document.getElementById('user-list');
                 const existingUserItem = document.getElementById(`user-${e.user.id}`);
 
-                // Check if the user is already in the list
                 if (!existingUserItem) {
                     const newUserItem = document.createElement('li');
                     newUserItem.classList.add('user-item');
@@ -146,7 +142,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     userList.appendChild(newUserItem);
                 }
 
-                // Show flash alert for user joining
                 if (e.user.id == {{ Auth::id() }}) {
                     showFlashAlert(`You joined Room: ${e.chatRoom.name}`, 'success');
                 } else {
@@ -159,7 +154,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     userItem.remove();
                 }
 
-                // Show flash alert for user leaving
                 if (e.user.id != {{ Auth::id() }}) {
                     showFlashAlert(`${e.user.name} left the room`, 'warning');
                 }
@@ -184,6 +178,5 @@ document.addEventListener('DOMContentLoaded', function () {
             sendMessage();
         }
     });
-
 });
 </script>

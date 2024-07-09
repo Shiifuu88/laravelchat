@@ -113,14 +113,3 @@
     </div>
 </nav>
 
-<script>
-    function leaveRoom() {
-        axios.post('{{ route('chatrooms.leave') }}', {
-            chat_room_id: '{{ session('chat_room_id') }}',
-        }).then(response => {
-            window.location.href = '{{ route('chatrooms.index') }}';
-        }).catch(error => {
-            console.error('Error leaving room:', error);
-        });
-    }
-</script>
