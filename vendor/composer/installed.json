@@ -44,7 +44,7 @@
                     }
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/helpers.php"
@@ -136,7 +136,7 @@
                     }
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "BeyondCode\\LaravelWebSockets\\": "src"
@@ -337,7 +337,7 @@
             },
             "time": "2021-12-14T00:20:41+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Ratchet\\": "src/Ratchet"
@@ -783,7 +783,7 @@
             },
             "time": "2023-08-08T05:53:35+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Evenement\\": "src/"
@@ -835,7 +835,7 @@
             },
             "time": "2020-10-16T08:27:54+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Facade\\IgnitionContracts\\": "src"
@@ -960,7 +960,7 @@
                     "dev-master": "1.1.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Fig\\Http\\Message\\": "src/"
@@ -1719,7 +1719,7 @@
                     ]
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Laravel\\Breeze\\": "src/"
@@ -2782,7 +2782,7 @@
                     "dev-master": "1.22-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "DebugBar\\": "src/DebugBar/"
@@ -3608,7 +3608,7 @@
             },
             "time": "2020-10-15T08:29:30+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
@@ -3662,7 +3662,7 @@
             },
             "time": "2024-04-22T22:05:04+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "autoload.php"
@@ -4663,7 +4663,7 @@
                     "dev-master": "1.1.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Psr\\Http\\Message\\": "src/"
@@ -4917,7 +4917,7 @@
                     "dev-master": "5.0-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Pusher\\": "src/"
@@ -5206,7 +5206,7 @@
             },
             "time": "2021-12-09T23:20:49+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Ratchet\\RFC6455\\": "src"
@@ -5265,7 +5265,7 @@
             },
             "time": "2022-11-30T15:59:55+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "React\\Cache\\": "src/"
@@ -5344,7 +5344,7 @@
             },
             "time": "2024-06-13T14:18:03+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "React\\Dns\\": "src/"
@@ -5421,7 +5421,7 @@
             },
             "time": "2023-11-13T13:48:05+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "React\\EventLoop\\": "src/"
@@ -5506,7 +5506,7 @@
             },
             "time": "2024-03-27T17:20:46+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "React\\Http\\": "src/"
@@ -5588,7 +5588,7 @@
             },
             "time": "2024-05-24T10:39:05+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/functions_include.php"
@@ -5671,7 +5671,7 @@
             },
             "time": "2023-12-15T11:02:10+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "React\\Socket\\": "src/"
@@ -5749,7 +5749,7 @@
             },
             "time": "2024-06-11T12:45:25+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "React\\Stream\\": "src/"
@@ -8912,7 +8912,7 @@
                     "dev-main": "2.3-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Bridge\\PsrHttpMessage\\": ""
