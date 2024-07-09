@@ -1,6 +1,2 @@
+# Ignoriere alle Dateien und Ordner
 *
-
-!/app/
-!/database/
-!/resources/
-!/routes/
