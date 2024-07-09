@@ -2,6 +2,7 @@ Ordner: C:\xampp\htdocs\laravel\app\Events
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Events\MessageSent
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -51,6 +52,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Events\UserJoinedRoom
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -97,6 +99,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Events\UserLeftRoom
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -145,6 +148,7 @@ Ordner: C:\xampp\htdocs\laravel\app\Http\Controllers
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\ChatRoomController
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -239,6 +243,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Controller
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -256,6 +261,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\MessageController
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -287,6 +293,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\ProfileController
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -352,6 +359,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\AuthenticatedSessionController
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -405,6 +413,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\ConfirmablePasswordController
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -451,6 +460,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\EmailVerificationNotificationController
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -481,6 +491,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\EmailVerificationPromptController
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -508,6 +519,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\NewPasswordController
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -574,6 +586,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\PasswordController
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -608,6 +621,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\PasswordResetLinkController
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -657,6 +671,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\RegisteredUserController
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -713,6 +728,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Controllers\Auth\VerifyEmailController
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -748,6 +764,7 @@ Ordner: C:\xampp\htdocs\laravel\app\Http\Middleware
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Middleware\Authenticate
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -770,6 +787,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Middleware\EncryptCookies
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -792,6 +810,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Middleware\EnsureSingleChatRoom
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -823,6 +842,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Middleware\EnsureUserLeavesChatRoom
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -861,6 +881,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Middleware\PreventRequestsDuringMaintenance
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -883,6 +904,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Middleware\RedirectIfAuthenticated
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -918,6 +940,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Middleware\SetChatRoomSession
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -949,6 +972,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Middleware\TrimStrings
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -973,6 +997,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Middleware\TrustHosts
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -998,6 +1023,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Middleware\TrustProxies
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1031,6 +1057,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Middleware\ValidateSignature
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1058,6 +1085,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Http\Middleware\VerifyCsrfToken
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1082,6 +1110,7 @@ Ordner: C:\xampp\htdocs\laravel\app\Listeners
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Listeners\NotifyMessageSent
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1113,6 +1142,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Listeners\NotifyUserJoinedRoom
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1145,6 +1175,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Listeners\NotifyUserLeftRoom
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1179,6 +1210,7 @@ Ordner: C:\xampp\htdocs\laravel\app\Models
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Models\ChatRoom
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1206,6 +1238,7 @@ class ChatRoom extends Model
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Models\Message
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1234,6 +1267,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Models\Session
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1267,6 +1301,7 @@ class Session extends Model
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Models\User
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1335,6 +1370,7 @@ Ordner: C:\xampp\htdocs\laravel\app\Providers
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Providers\AppServiceProvider
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1369,6 +1405,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Providers\AuthServiceProvider
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1400,6 +1437,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Providers\BroadcastServiceProvider
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1424,6 +1462,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Providers\EventServiceProvider
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1481,6 +1520,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\app\Providers\RouteServiceProvider
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1528,6 +1568,7 @@ Ordner: C:\xampp\htdocs\laravel\database\migrations
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\database\migrations\0000_00_00_000000_create_websockets_statistics_entries_table
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1568,6 +1609,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\database\migrations\2014_10_12_000000_create_users_table
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1605,6 +1647,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\database\migrations\2014_10_12_100000_create_password_reset_tokens_table
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1638,6 +1681,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\database\migrations\2019_08_19_000000_create_failed_jobs_table
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1675,6 +1719,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\database\migrations\2019_12_14_000001_create_personal_access_tokens_table
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1713,6 +1758,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\database\migrations\2024_07_05_120724_create_chat_rooms_table
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1746,6 +1792,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\database\migrations\2024_07_05_120726_create_messages_table
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1781,6 +1828,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\database\migrations\2024_07_06_042737_create_sessions_table
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1817,6 +1865,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\database\migrations\2024_07_06_043202_add_chat_room_to_sessions_table
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -1856,6 +1905,7 @@ Ordner: C:\xampp\htdocs\laravel\resources\css
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\css\app
+Dateiformat: css
 Anfang Inhalt:
 @tailwind base;
 @tailwind components;
@@ -2118,6 +2168,7 @@ Ordner: C:\xampp\htdocs\laravel\resources\js
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\js\app
+Dateiformat: js
 Anfang Inhalt:
 import './bootstrap';
 
@@ -2131,6 +2182,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\js\bootstrap
+Dateiformat: js
 Anfang Inhalt:
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -2172,6 +2224,7 @@ Ordner: C:\xampp\htdocs\laravel\resources\views
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\chat.blade
+Dateiformat: php
 Anfang Inhalt:
 <x-app-layout>
     <x-slot name="header">
@@ -2235,6 +2288,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\welcome.blade
+Dateiformat: php
 Anfang Inhalt:
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -2373,6 +2427,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\auth\confirm-password.blade
+Dateiformat: php
 Anfang Inhalt:
 <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600">
@@ -2405,6 +2460,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\auth\forgot-password.blade
+Dateiformat: php
 Anfang Inhalt:
 <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600">
@@ -2435,6 +2491,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\auth\login.blade
+Dateiformat: php
 Anfang Inhalt:
 <x-guest-layout>
     <!-- Session Status -->
@@ -2487,6 +2544,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\auth\register.blade
+Dateiformat: php
 Anfang Inhalt:
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
@@ -2544,6 +2602,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\auth\reset-password.blade
+Dateiformat: php
 Anfang Inhalt:
 <x-guest-layout>
     <form method="POST" action="{{ route('password.store') }}">
@@ -2588,6 +2647,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\auth\verify-email.blade
+Dateiformat: php
 Anfang Inhalt:
 <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600">
@@ -2624,6 +2684,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\chatrooms\index.blade
+Dateiformat: php
 Anfang Inhalt:
 <x-app-layout>
 
@@ -2650,6 +2711,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\chatrooms\show.blade
+Dateiformat: php
 Anfang Inhalt:
 <x-app-layout>
     <div class="main-container">
@@ -2844,6 +2906,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\application-logo.blade
+Dateiformat: php
 Anfang Inhalt:
 <svg viewBox="0 0 316 316" xmlns="http://www.w3.org/2000/svg" {{ $attributes }}>
     <path d="M305.8 81.125C305.77 80.995 305.69 80.885 305.65 80.755C305.56 80.525 305.49 80.285 305.37 80.075C305.29 79.935 305.17 79.815 305.07 79.685C304.94 79.515 304.83 79.325 304.68 79.175C304.55 79.045 304.39 78.955 304.25 78.845C304.09 78.715 303.95 78.575 303.77 78.475L251.32 48.275C249.97 47.495 248.31 47.495 246.96 48.275L194.51 78.475C194.33 78.575 194.19 78.725 194.03 78.845C193.89 78.955 193.73 79.045 193.6 79.175C193.45 79.325 193.34 79.515 193.21 79.685C193.11 79.815 192.99 79.935 192.91 80.075C192.79 80.285 192.71 80.525 192.63 80.755C192.58 80.875 192.51 80.995 192.48 81.125C192.38 81.495 192.33 81.875 192.33 82.265V139.625L148.62 164.795V52.575C148.62 52.185 148.57 51.805 148.47 51.435C148.44 51.305 148.36 51.195 148.32 51.065C148.23 50.835 148.16 50.595 148.04 50.385C147.96 50.245 147.84 50.125 147.74 49.995C147.61 49.825 147.5 49.635 147.35 49.485C147.22 49.355 147.06 49.265 146.92 49.155C146.76 49.025 146.62 48.885 146.44 48.785L93.99 18.585C92.64 17.805 90.98 17.805 89.63 18.585L37.18 48.785C37 48.885 36.86 49.035 36.7 49.155C36.56 49.265 36.4 49.355 36.27 49.485C36.12 49.635 36.01 49.825 35.88 49.995C35.78 50.125 35.66 50.245 35.58 50.385C35.46 50.595 35.38 50.835 35.3 51.065C35.25 51.185 35.18 51.305 35.15 51.435C35.05 51.805 35 52.185 35 52.575V232.235C35 233.795 35.84 235.245 37.19 236.025L142.1 296.425C142.33 296.555 142.58 296.635 142.82 296.725C142.93 296.765 143.04 296.835 143.16 296.865C143.53 296.965 143.9 297.015 144.28 297.015C144.66 297.015 145.03 296.965 145.4 296.865C145.5 296.835 145.59 296.775 145.69 296.745C145.95 296.655 146.21 296.565 146.45 296.435L251.36 236.035C252.72 235.255 253.55 233.815 253.55 232.245V174.885L303.81 145.945C305.17 145.165 306 143.725 306 142.155V82.265C305.95 81.875 305.89 81.495 305.8 81.125ZM144.2 227.205L100.57 202.515L146.39 176.135L196.66 147.195L240.33 172.335L208.29 190.625L144.2 227.205ZM244.75 114.995V164.795L226.39 154.225L201.03 139.625V89.825L219.39 100.395L244.75 114.995ZM249.12 57.105L292.81 82.265L249.12 107.425L205.43 82.265L249.12 57.105ZM114.49 184.425L96.13 194.995V85.305L121.49 70.705L139.85 60.135V169.815L114.49 184.425ZM91.76 27.425L135.45 52.585L91.76 77.745L48.07 52.585L91.76 27.425ZM43.67 60.135L62.03 70.705L87.39 85.305V202.545V202.555V202.565C87.39 202.735 87.44 202.895 87.46 203.055C87.49 203.265 87.49 203.485 87.55 203.695V203.705C87.6 203.875 87.69 204.035 87.76 204.195C87.84 204.375 87.89 204.575 87.99 204.745C87.99 204.745 87.99 204.755 88 204.755C88.09 204.905 88.22 205.035 88.33 205.175C88.45 205.335 88.55 205.495 88.69 205.635L88.7 205.645C88.82 205.765 88.98 205.855 89.12 205.965C89.28 206.085 89.42 206.225 89.59 206.325C89.6 206.325 89.6 206.325 89.61 206.335C89.62 206.335 89.62 206.345 89.63 206.345L139.87 234.775V285.065L43.67 229.705V60.135ZM244.75 229.705L148.58 285.075V234.775L219.8 194.115L244.75 179.875V229.705ZM297.2 139.625L253.49 164.795V114.995L278.85 100.395L297.21 89.825V139.625H297.2Z"/>
@@ -2852,6 +2915,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\auth-session-status.blade
+Dateiformat: php
 Anfang Inhalt:
 @props(['status'])
 
@@ -2864,6 +2928,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\danger-button.blade
+Dateiformat: php
 Anfang Inhalt:
 <button {{ $attributes->merge(['type' => 'submit', 'class' => 'inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150']) }}>
     {{ $slot }}
@@ -2872,12 +2937,14 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\dropdown-link.blade
+Dateiformat: php
 Anfang Inhalt:
 <a {{ $attributes->merge(['class' => 'block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out']) }}>{{ $slot }}</a>
 Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\dropdown.blade
+Dateiformat: php
 Anfang Inhalt:
 @props(['align' => 'right', 'width' => '48', 'contentClasses' => 'py-1 bg-white'])
 
@@ -2926,6 +2993,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\input-error.blade
+Dateiformat: php
 Anfang Inhalt:
 @props(['messages'])
 
@@ -2940,6 +3008,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\input-label.blade
+Dateiformat: php
 Anfang Inhalt:
 @props(['value'])
 
@@ -2950,6 +3019,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\modal.blade
+Dateiformat: php
 Anfang Inhalt:
 @props([
     'name',
@@ -3033,6 +3103,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\nav-link.blade
+Dateiformat: php
 Anfang Inhalt:
 @props(['active'])
 
@@ -3049,6 +3120,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\primary-button.blade
+Dateiformat: php
 Anfang Inhalt:
 <button {{ $attributes->merge(['type' => 'submit', 'class' => 'inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150']) }}>
     {{ $slot }}
@@ -3057,6 +3129,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\responsive-nav-link.blade
+Dateiformat: php
 Anfang Inhalt:
 @props(['active'])
 
@@ -3073,6 +3146,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\secondary-button.blade
+Dateiformat: php
 Anfang Inhalt:
 <button {{ $attributes->merge(['type' => 'button', 'class' => 'inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150']) }}>
     {{ $slot }}
@@ -3081,6 +3155,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\components\text-input.blade
+Dateiformat: php
 Anfang Inhalt:
 @props(['disabled' => false])
 
@@ -3089,6 +3164,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\layouts\app.blade
+Dateiformat: php
 Anfang Inhalt:
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -3121,6 +3197,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\layouts\guest.blade
+Dateiformat: php
 Anfang Inhalt:
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -3156,6 +3233,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\layouts\navigation.blade
+Dateiformat: php
 Anfang Inhalt:
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
@@ -3287,6 +3365,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\profile\edit.blade
+Dateiformat: php
 Anfang Inhalt:
 <x-app-layout>
     <x-slot name="header">
@@ -3321,6 +3400,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\profile\partials\delete-user-form.blade
+Dateiformat: php
 Anfang Inhalt:
 <section class="space-y-6">
     <header>
@@ -3381,6 +3461,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\profile\partials\update-password-form.blade
+Dateiformat: php
 Anfang Inhalt:
 <section>
     <header>
@@ -3434,6 +3515,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\resources\views\profile\partials\update-profile-information-form.blade
+Dateiformat: php
 Anfang Inhalt:
 <section>
     <header>
@@ -3505,6 +3587,7 @@ Ordner: C:\xampp\htdocs\laravel\routes
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\routes\api
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -3529,6 +3612,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\routes\auth
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -3593,6 +3677,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\routes\channels
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -3606,6 +3691,7 @@ Broadcast::channel('chatroom.{chatRoomId}', function ($user, $chatRoomId) {
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\routes\console
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
@@ -3630,6 +3716,7 @@ Ende Inhalt
 ============================================================
 ============================================================
 Pfad: C:\xampp\htdocs\laravel\routes\web
+Dateiformat: php
 Anfang Inhalt:
 <?php
 
