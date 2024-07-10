@@ -84,6 +84,6 @@ class ChatRoomController extends Controller
             'chat_room_name' => null,
         ]);
 
-        return response()->json(['status' => 'left']);
+        return redirect()->route('chatrooms.index');
     }
 }
