@@ -24,9 +24,10 @@
                 @foreach ($messages as $message)
                     <div class="message-item {{ $message->user_id == Auth::id() ? 'own-message' : '' }}">
                         <div>
-                            <strong>{{ $message->user->name }}:</strong> {{ $message->message }}
+                            <strong>{{ $message->user->name }}</strong>
                         </div>
-                        <div class="text-sm text-gray-500">
+                        <div class="message-content">{{ $message->message }}</div>
+                        <div class="message-date text-sm text-gray-500">
                             {{ $message->created_at->format('d.m.Y H:i') }}
                         </div>
                     </div>
@@ -110,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         setTimeout(() => {
             flashAlert.remove();
-        }, 3000); // Remove after 3 seconds
+        }, 3000);
     }
 
     if (typeof window.Echo !== 'undefined') {
@@ -124,9 +125,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 newMessageDiv.innerHTML = `
                     <div>
-                        <strong>${e.user.name}:</strong> ${e.message.message}
+                        <strong>${e.user.name}</strong>
                     </div>
-                    <div class="text-sm text-gray-500">
+                    <div class="message-content">${e.message.message}</div>
+                    <div class="message-date text-sm text-gray-500">
                         ${new Date(e.message.created_at).toLocaleString()}
                     </div>
                 `;
@@ -137,7 +139,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 const userList = document.getElementById('user-list');
                 const existingUserItem = document.getElementById(`user-${e.user.id}`);
 
-                // Check if the user is already in the list
                 if (!existingUserItem) {
                     const newUserItem = document.createElement('li');
                     newUserItem.classList.add('user-item');
@@ -146,7 +147,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     userList.appendChild(newUserItem);
                 }
 
-                // Show flash alert for user joining
                 if (e.user.id == {{ Auth::id() }}) {
                     showFlashAlert(`You joined Room: ${e.chatRoom.name}`, 'success');
                 } else {
@@ -159,9 +159,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     userItem.remove();
                 }
 
-                // Show flash alert for user leaving
                 if (e.user.id != {{ Auth::id() }}) {
                     showFlashAlert(`${e.user.name} left the room`, 'warning');
+                } else {
+                    showFlashAlert('You left the room', 'warning');
                 }
             });
     }
@@ -169,9 +170,6 @@ document.addEventListener('DOMContentLoaded', function () {
     window.sendMessage = sendMessage;
     window.switchRoom = switchRoom;
     window.leaveRoom = leaveRoom;
-
-    const messagesDiv = document.getElementById('messages');
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
 
     document.getElementById('sendMessageForm').addEventListener('submit', function (e) {
         e.preventDefault();
@@ -184,6 +182,5 @@ document.addEventListener('DOMContentLoaded', function () {
             sendMessage();
         }
     });
-
 });
 </script>
