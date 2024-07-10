@@ -9,7 +9,10 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Events\UserJoinedRoom;
 use App\Events\UserLeftRoom;
-
+use App\Models\Ban;
+use Carbon\Carbon;
+use App\Events\UserBanned;
+use App\Models\Message;
 class ChatRoomController extends Controller
 {
     public function index()
@@ -20,15 +23,11 @@ class ChatRoomController extends Controller
 
     public function show(ChatRoom $chatRoom)
     {
-        $messages = $chatRoom->messages()->with('user')->get();
+        $messages = Message::where('chat_room_id', $chatRoom->id)->with('user')->get();
+        $usersInRoom = $chatRoom->users; // Annahme: $chatRoom hat eine Beziehung zu den Benutzern
         $otherChatRooms = ChatRoom::where('id', '!=', $chatRoom->id)->get();
-        $usersInRoom = $chatRoom->users; // Assuming you have a users relationship in ChatRoom model
-
-        // Update session
-        $this->updateSession($chatRoom->id, $chatRoom->name);
-        event(new UserJoinedRoom(Auth::user(), $chatRoom->id));
-        
-        return view('chatrooms.show', compact('chatRoom', 'messages', 'otherChatRooms', 'usersInRoom'));
+	
+        return view('chatrooms.show', compact('chatRoom', 'messages', 'usersInRoom', 'otherChatRooms'));
     }
 
     public function switchRoom(Request $request)
@@ -86,4 +85,35 @@ class ChatRoomController extends Controller
 
         return redirect()->route('chatrooms.index');
     }
+	
+	public function banUser(Request $request, ChatRoom $chatRoom)
+	{
+		$request->validate([
+			'user_id' => 'required|exists:users,id',
+			'banned_until' => 'nullable|date',
+		]);
+
+		$ban = Ban::create([
+			'user_id' => $request->user_id,
+			'chat_room_id' => $chatRoom->id,
+			'banned_until' => $request->banned_until ? Carbon::parse($request->banned_until) : null,
+		]);
+
+		// Setze die Sitzung des gebannten Benutzers zurück
+		$userSession = Session::where('user_id', $request->user_id)->first();
+		if ($userSession) {
+			$userSession->chat_room_id = null;
+			$userSession->chat_room_name = null;
+			$userSession->save();
+		}
+
+		// Lösche auch die aktuelle Sitzung des Benutzers
+		SessionFacade::forget('chat_room_id');
+		SessionFacade::forget('chat_room_name');
+
+		broadcast(new UserBanned($request->user_id, $chatRoom->id, $ban->banned_until))->toOthers();
+
+		return response()->json(['message' => 'User banned successfully']);
+	}
+	
 }

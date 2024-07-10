@@ -4,28 +4,29 @@ namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\User;
-use App\Models\ChatRoom;
 
-class UserJoinedRoom implements ShouldBroadcast
+class UserBanned implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $user;
-    public $chatRoom;
+    public $userId;
+    public $chatRoomId;
+    public $bannedUntil;
 
-    public function __construct(User $user, ChatRoom $chatRoom)
+    public function __construct($userId, $chatRoomId, $bannedUntil)
     {
-        $this->user = $user;
-        $this->chatRoom = $chatRoom;
+        $this->userId = $userId;
+        $this->chatRoomId = $chatRoomId;
+        $this->bannedUntil = $bannedUntil;
     }
 
     public function broadcastOn()
     {
-        return new PrivateChannel('chatroom.' . $this->chatRoom->id);
+        return new PrivateChannel('chatroom.' . $this->chatRoomId);
     }
 }

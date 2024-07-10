@@ -32,6 +32,9 @@ class EventServiceProvider extends ServiceProvider
         MessageSent::class => [
             NotifyMessageSent::class,
         ],
+		UserBanned::class => [
+			HandleUserBanned::class,
+		],
     ];
 
     /**
