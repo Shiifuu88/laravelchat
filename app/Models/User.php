@@ -58,4 +58,8 @@ class User extends Authenticatable
         return $this->hasOne(Session::class);
     }
 
+	public function sessions()
+    {
+        return $this->hasMany(Session::class);
+    }
 }

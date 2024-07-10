@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             })
             .listen('UserLeftRoom', (e) => {
-                const userItem = document.getElementById(`user-${e.user.id}`);
+                const userItem = document.getElementById(`user-${e.userId}`);
                 if (userItem) {
                     userItem.remove();
                 }
